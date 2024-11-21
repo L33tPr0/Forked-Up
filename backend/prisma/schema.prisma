@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Owners {
+  id Int @id @default(autoincrement())
+  email String @unique
+  username String @unique
+  hashedPassword String @unique
+  avatar String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  restaurant Restaurants[]
+}
+
+model Restaurants {
+  id Int @id @default(autoincrement())
+  name String @default("Fresh Start")
+  owner_id Int
+  has_carryout Boolean
+  seating_capacity Int?
+  is_for_sale Boolean
+
+  owner Owners @relation(fields: [owner_id], references: [id])
+
+  inventory Inventories?
+  menu Menus?
+}
+
+model Inventories {
+  id Int @id @default(autoincrement())
+  restaurant Restaurants @relation(fields: [restaurant_id], references: [id])
+  restaurant_id Int @unique
+}
+
+model Menus {
+  id Int @id @default(autoincrement())
+  restaurant Restaurants @relation(fields: [restaurant_id], references: [id])
+  restaurant_id Int @unique
+
+  entry Entries[]
+}
+
+model Entries {
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  price Decimal @db.Money
+  is_gluten_free Boolean
+  is_daily_special Boolean
+  calories Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  menu Menus[]
+  ingredient Ingredients[]
+}
+
+model Ingredients {
+  id Int @id @default(autoincrement())
+  name String
+  cost Decimal @db.Money
+  type String
+  auto_ship Boolean
+  quantity Decimal @db.Decimal(64,2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  entry Entries[]
+}

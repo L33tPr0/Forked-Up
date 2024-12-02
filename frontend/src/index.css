@@ -10,38 +10,12 @@
     font-family: "Share Tech Mono", monospace;
 }
 
-:root {
-    --background-color: rgb(23, 23, 29);
-    --color: white;
-    --light-pink: #fec3c9;
-    --off-white: #f5e8dd;
-    --khaki-green: #bce3ba;
-    --sea-blue: #b5c0e0;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    & input::placeholder {
-        background: linear-gradient(
-            74deg,
-            var(--sea-blue) 25%,
-            var(--khaki-green) 40%,
-            var(--light-pink) 100%
-        );
-        width: fit-content;
-        background-clip: text;
-        color: transparent;
-    }
-}
-
+html,
+body,
 #root {
-    height: 100%;
     width: 100%;
-}
-
-.error-message {
-    color: red;
+    height: 100%;
+    @apply text-sm;
+    @apply bg-gray-500;
+    @apply text-gray-900;
 }

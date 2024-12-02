@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { User, UserRequest, UserResponse } from "../../types";
+import prisma from "../../prisma";
 import { hashSync, compareSync } from "bcryptjs";
 import { setTokenCookie } from "../../utils/auth";
-import prisma from "../../prisma";
 
 const router = Router({ caseSensitive: true, strict: true });
 

@@ -1,0 +1,14 @@
+{
+    "name": "forkedup",
+    "version": "1.0.0",
+    "description": "## For when your restaurant business gets a little chaotic.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "install": "npm --prefix backend install backend",
+        "build": "npm run --prefix backend build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

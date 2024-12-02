@@ -1,0 +1,19 @@
+[
+    {
+        "owner_id": "cd1d2ffc-d024-4fdd-8ac9-bc67b770ee07",
+        "has_carryout": true,
+        "is_for_sale": false,
+        "name": "Dine'r Dash"
+    },
+    {
+        "owner_id": "cd1d2ffc-d024-4fdd-8ac9-bc67b770ee07",
+        "has_carryout": false,
+        "is_for_sale": false,
+        "name": "Gourmet Delights"
+    },
+    {
+        "has_carryout": true,
+        "is_for_sale": true,
+        "name": "Nacho Surprise"
+    }
+]

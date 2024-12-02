@@ -10,11 +10,11 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("EXT_DATABASE_URL")
 }
 
-model Owners {
-  id Int @id @default(autoincrement())
+model Owner {
+  id String @id @default(uuid())
   email String @unique
   username String @unique
   hashedPassword String @unique
@@ -22,38 +22,48 @@ model Owners {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  restaurant Restaurants[]
+  restaurant Restaurant[]
+
+  @@map("users")
 }
 
-model Restaurants {
+model Restaurant {
   id Int @id @default(autoincrement())
-  name String @default("Fresh Start")
-  owner_id Int
+  name String @default("Humble Beginnings")
+  owner_id String?
   has_carryout Boolean
   seating_capacity Int?
   is_for_sale Boolean
 
-  owner Owners @relation(fields: [owner_id], references: [id])
+  owner Owner? @relation(fields: [owner_id], references: [id])
 
-  inventory Inventories?
-  menu Menus?
+  inventory Inventory?
+  menu Menu?
+
+  @@map("restaurants")
 }
 
-model Inventories {
+model Inventory {
   id Int @id @default(autoincrement())
-  restaurant Restaurants @relation(fields: [restaurant_id], references: [id])
   restaurant_id Int @unique
+  restaurant Restaurant @relation(fields: [restaurant_id], references: [id], onDelete: Cascade)
+
+  ingredient Ingredient[]
+
+  @@map("inventories")
 }
 
-model Menus {
+model Menu {
   id Int @id @default(autoincrement())
-  restaurant Restaurants @relation(fields: [restaurant_id], references: [id])
+  restaurant Restaurant @relation(fields: [restaurant_id], references: [id])
   restaurant_id Int @unique
 
-  entry Entries[]
+  entry Entry[]
+
+  @@map("menus")
 }
 
-model Entries {
+model Entry {
   id Int @id @default(autoincrement())
   name String
   description String?
@@ -64,19 +74,26 @@ model Entries {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  menu Menus[]
-  ingredient Ingredients[]
+  menu Menu[]
+  ingredient Ingredient[]
+
+  @@map("entries")
 }
 
-model Ingredients {
+model Ingredient {
   id Int @id @default(autoincrement())
   name String
   cost Decimal @db.Money
-  type String
+  ingredient_type String
   auto_ship Boolean
-  quantity Decimal @db.Decimal(64,2)
+  unit_type String
+  quantity_on_hand Decimal @db.Decimal(64,2)
+  quantity_to_order Decimal @db.Decimal(64,2)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  entry Entries[]
+  entry Entry[]
+  inventory Inventory[]
+
+  @@map("ingredients")
 }

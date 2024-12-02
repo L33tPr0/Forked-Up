@@ -2,7 +2,7 @@ import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
 import config from "../config";
 import prisma from "../prisma";
 
-import type { NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import {
     type UserResponse,
     type User,
@@ -40,15 +40,14 @@ export const setTokenCookie = (res: UserResponse, user: User) => {
 };
 
 export const restoreUser = (
-    req: UserRequest,
-    res: UserResponse,
+    req: Request,
+    res: Response,
     next: NextFunction
 ) => {
-    if (!secret) return;
     const { token } = req.cookies;
-    req.user = null;
+    (req as UserRequest).user = null;
 
-    return jwt.verify(token, secret, undefined, async (err, jwtPayload) => {
+    return jwt.verify(token, secret!, undefined, async (err, jwtPayload) => {
         if (err) {
             return next();
         }
@@ -56,13 +55,14 @@ export const restoreUser = (
         try {
             const { id } = (jwtPayload as JwtPayload).data;
 
-            req.user = await prisma.owners.findUnique({
+            (req as UserRequest).user = await prisma.owner.findUnique({
                 where: {
                     id,
                 },
                 select: {
                     id: true,
                     email: true,
+                    avatar: true,
                     username: true,
                 },
             });
@@ -71,7 +71,7 @@ export const restoreUser = (
             return next();
         }
 
-        if (!req.user) res.clearCookie("token");
+        if (!(req as UserRequest).user) res.clearCookie("token");
 
         return next();
     });

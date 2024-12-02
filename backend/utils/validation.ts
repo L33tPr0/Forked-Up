@@ -22,7 +22,7 @@ export const handleValidationErrors = (
             .array()
             .forEach((error) => (errors[error.path] = error.msg));
 
-        const err = new AuthenticationError("Bad request.");
+        const err = new AuthenticationError("Bad request");
         err.errors = errors;
         err.status = 400;
         next(err);

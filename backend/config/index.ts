@@ -1,6 +1,6 @@
 export default {
     environment: process.env.NODE_ENV || "development",
-    port: process.env.PORT || "8000",
+    port: process.env.PORT || 8000,
     db: {
         schema: process.env.SCHEMA,
         file: process.env.DB_FILE,

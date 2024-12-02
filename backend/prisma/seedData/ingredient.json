@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Flour",
+        "cost": 2.99,
+        "ingredient_type": "All-Purpose",
+        "auto_ship": false,
+        "unit_type": "pound",
+        "quantity_on_hand": 15,
+        "quantity_to_order": 20
+    },
+    {
+        "name": "Eggs",
+        "cost": 4.99,
+        "ingredient_type": "All-Purpose",
+        "auto_ship": true,
+        "unit_type": "dozen",
+        "quantity_on_hand": 12.5,
+        "quantity_to_order": 30
+    },
+    {
+        "name": "Dill Pickles",
+        "cost": 19.99,
+        "ingredient_type": "Vegetable",
+        "auto_ship": false,
+        "unit_type": "5 gallon",
+        "quantity_on_hand": 3,
+        "quantity_to_order": 2
+    },
+    {
+        "name": "Frank's Red Hot",
+        "cost": 3.49,
+        "ingredient_type": "Seasoning",
+        "auto_ship": true,
+        "unit_type": "pint",
+        "quantity_on_hand": 10,
+        "quantity_to_order": 8
+    },
+    {
+        "name": "Garlic",
+        "cost": 1.99,
+        "ingredient_type": "Aromatic",
+        "auto_ship": true,
+        "unit_type": "head",
+        "quantity_on_hand": 7.5,
+        "quantity_to_order": 10
+    },
+    {
+        "name": "Onion",
+        "cost": 2.99,
+        "ingredient_type": "Layers",
+        "auto_ship": false,
+        "unit_type": "bulb",
+        "quantity_on_hand": 9.4,
+        "quantity_to_order": 18
+    }
+]

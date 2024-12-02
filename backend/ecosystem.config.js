@@ -2,7 +2,7 @@ module.exports = {
     apps: [
         {
             name: "restaurantmanagementcompanion",
-            scripts: "npm",
+            script: "npm",
             args: "run dev",
             env: {
                 NODE_ENV: "development",

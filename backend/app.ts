@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import { AuthenticationError } from "./types";
 import config from "./config";
 
+require("dotenv").config();
 const app = express();
 const IS_PRODUCTION = config.environment === "production";
 
@@ -31,6 +32,8 @@ if (!IS_PRODUCTION) {
 /* ROUTES */
 
 app.use(routes);
+
+/* Error Handling */
 
 app.use((_req, _res, next: NextFunction) => {
     const err = new AuthenticationError(
@@ -57,4 +60,8 @@ app.use(
     }
 );
 
-export default app;
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});

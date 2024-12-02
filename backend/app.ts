@@ -33,32 +33,7 @@ if (!IS_PRODUCTION) {
 
 app.use(routes);
 
-/* Error Handling */
-
-app.use((_req, _res, next: NextFunction) => {
-    const err = new AuthenticationError(
-        "The requested resource couldn't be found"
-    );
-    err.status = 404;
-    err.errors = { message: "The requested resource couldn't be found" };
-
-    next(err);
-});
-
-app.use(
-    (
-        err: AuthenticationError,
-        _req: Request,
-        res: Response,
-        _next: NextFunction
-    ) => {
-        res.status(err.status || 500).json({
-            message: err.message,
-            errors: err.errors,
-            stack: IS_PRODUCTION ? undefined : err.stack,
-        });
-    }
-);
+/* CONNECT */
 
 const PORT = process.env.PORT || 3001;
 

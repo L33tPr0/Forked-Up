@@ -9,13 +9,16 @@ const router = Router({ caseSensitive: true, strict: true });
 router.get("/", (req, res, next) => {
     console.log("REQUEST BODY FROM /API/SESSION ===> ", req.body);
     const { user } = req as UserRequest;
-    if (!user) res.json(null);
-    const safeUser = {
-        id: user?.id,
-        email: user?.email,
-        username: user?.username,
-    };
-    res.json(safeUser);
+    if (!user) {
+        res.json(null);
+    } else {
+        const safeUser = {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+        };
+        res.json(safeUser);
+    }
 });
 
 router.post("/login", async (req, res, next) => {

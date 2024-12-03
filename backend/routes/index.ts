@@ -11,7 +11,7 @@ router.use("/api", apiRouter);
 if (process.env.NODE_ENV === "production") {
     router.get("/", (req, res) => {
         res.sendFile(
-            path.resolve(__dirname, "../../frontend", "dist", "index.html")
+            path.resolve(__dirname, "../../../frontend", "dist", "index.html")
         );
     });
 
@@ -19,7 +19,12 @@ if (process.env.NODE_ENV === "production") {
 
     router.get(/^(?!\/?api).*/, (req, res) => {
         res.sendFile(
-            path.resolve(__dirname, "../../frontend", "dist", "index.html")
+            path.resolve(
+                __dirname,
+                "../../../frontend",
+                "dist",
+                req.path.slice(1)
+            )
         );
     });
 }

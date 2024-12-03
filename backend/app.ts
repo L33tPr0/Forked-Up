@@ -5,7 +5,6 @@ import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import { AuthenticationError } from "./types";
 import config from "./config";
 
 require("dotenv").config();

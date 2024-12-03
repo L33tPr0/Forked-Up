@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { restoreUser } from "./redux/reducers/session";
 import {
@@ -20,21 +20,21 @@ function App() {
         (state: RootState) => state.global.isDarkMode
     );
     function Layout() {
-        const [isLoaded, setIsLoaded] = useState(false);
         const navigateTo = useNavigate();
         const user: User | null = useAppSelector((state) => state.session.user);
 
         useEffect(() => {
-            if (!user) navigateTo("/");
-        }, [user, navigateTo]);
+            if (user) return;
 
-        useEffect(() => {
-            dispatch(restoreUser()).then(() => {
-                setIsLoaded(true);
+            dispatch(restoreUser()).then((action) => {
+                if (action.type === "session/restoreUser/rejected") {
+                    navigateTo("/");
+                    return;
+                }
             });
-        }, []);
+        }, [navigateTo, user]);
 
-        return isLoaded ? <Outlet /> : null;
+        return <Outlet />;
     }
 
     const router = createBrowserRouter([

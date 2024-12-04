@@ -18,7 +18,7 @@ export const signIn = createAppAsyncThunk(
                     "Content-Type": "application/json",
                 },
             });
-            console.log(res);
+
             const data = await res.json();
 
             if (!res.ok) {
@@ -90,7 +90,6 @@ export const sessionSlice = createSlice({
                 (action) =>
                     isAnyOf(signIn.fulfilled, restoreUser.fulfilled)(action),
                 (state, action: PayloadAction<User>) => {
-                    console.log(action.payload);
                     setUser(state, action.payload);
                 }
             );

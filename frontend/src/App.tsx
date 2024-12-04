@@ -48,7 +48,11 @@ function App() {
             children: [
                 {
                     index: true,
-                    element: <SignIn />,
+                    element: (
+                        <div className="light h-full bg-gray-800 -z-30 grid place-items-center">
+                            <SignIn />
+                        </div>
+                    ),
                 },
                 {
                     path: "home",

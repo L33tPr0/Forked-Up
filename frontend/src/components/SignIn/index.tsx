@@ -2,6 +2,7 @@ import {
     ChangeEvent,
     Dispatch,
     FormEvent,
+    MouseEvent,
     ReactElement,
     SetStateAction,
     useEffect,
@@ -38,6 +39,15 @@ export default function SignIn() {
         cb(e.target.value);
     }
 
+    async function demoUserSignin(e: MouseEvent) {
+        e.preventDefault();
+        const payload = {
+            username: "demouser",
+            password: "password",
+        };
+        await dispatch(signIn(payload));
+    }
+
     function handleSubmit() {
         const payload = isLogin
             ? {
@@ -68,34 +78,32 @@ export default function SignIn() {
 
         if (username.length < 4)
             errors.username = (
-                <div className="error-message">
+                <div className="text-red-400">
                     Provided username must be more than 4 characters
                 </div>
             );
         if (!username)
             errors.username = (
-                <div className="error-message">Username is required</div>
+                <div className="text-red-400">Username is required</div>
             );
 
         if (password.length < 6)
             errors.password = (
-                <div className="error-message">
+                <div className="text-red-400">
                     Provided password must be more than 6 characters
                 </div>
             );
         if (!password)
             errors.password = (
-                <div className="error-message">Password is required</div>
+                <div className="text-red-400">Password is required</div>
             );
         if (!email.includes("@") && !isLogin)
             errors.email = (
-                <div className="error-message">
-                    Provided email must be valid
-                </div>
+                <div className="text-red-400">Provided email must be valid</div>
             );
         if (!email && !isLogin)
             errors.email = (
-                <div className="error-message">Email is required</div>
+                <div className="text-red-400">Email is required</div>
             );
         if (password !== confirmPassword && !isLogin)
             errors.passwordMismatch = (
@@ -133,9 +141,19 @@ export default function SignIn() {
                         placeholder="Password"
                     />
                 </div>
-                <button type="submit" className="w-1/4" title="Login">
+                <button
+                    type="submit"
+                    className="submit-btn text-white"
+                    title="Login"
+                >
                     Login
                 </button>
+                <a
+                    className="cursor-pointer"
+                    onClick={(e) => demoUserSignin(e)}
+                >
+                    Sign in as Demo User
+                </a>
                 <div>
                     Don&apos;t have an account? Create one{" "}
                     <span className="here" onClick={() => setIsLogin(!isLogin)}>
@@ -177,6 +195,12 @@ export default function SignIn() {
                 <button type="submit" className="submit-btn" title="Sign Up">
                     Sign Up
                 </button>
+                <a
+                    className="light cursor-pointer text-slate-400"
+                    onClick={(e) => demoUserSignin(e)}
+                >
+                    Sign in as Demo User
+                </a>
                 <div>
                     Already have an account? Log in{" "}
                     <span className="here" onClick={() => setIsLogin(!isLogin)}>

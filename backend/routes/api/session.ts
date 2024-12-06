@@ -23,6 +23,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     const { password, username } = req.body;
+    console.log(password, username);
     if (!password || !username) {
         res.status(400).json({
             message: "Missing login credentials in request body",
@@ -34,7 +35,7 @@ router.post("/login", async (req, res, next) => {
                 username,
             },
         });
-
+        console.log(user);
         if (!user || !compareSync(password, user.hashedPassword.toString())) {
             next();
         }
@@ -45,7 +46,7 @@ router.post("/login", async (req, res, next) => {
             username: user?.username,
             avatar: user?.avatar,
         };
-
+        console.log(safeUser);
         await setTokenCookie(res as UserResponse, safeUser as User);
 
         res.json(safeUser);

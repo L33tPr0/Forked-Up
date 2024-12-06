@@ -28,16 +28,13 @@ router.post("/login", async (req, res, next) => {
             message: "Missing login credentials in request body",
         });
     }
-    let user;
     try {
-        user = await prisma.owner.findUnique({
+        const user = await prisma.owner.findUnique({
             where: {
                 username,
             },
         });
-    } catch (e) {
-        res.status(500).json({ message: "This user does not exist", error: e });
-    } finally {
+
         if (!user || !compareSync(password, user.hashedPassword.toString())) {
             next();
         }
@@ -52,6 +49,8 @@ router.post("/login", async (req, res, next) => {
         await setTokenCookie(res as UserResponse, safeUser as User);
 
         res.json(safeUser);
+    } catch (e) {
+        res.status(500).json({ message: "This user does not exist", error: e });
     }
 });
 

@@ -55,6 +55,7 @@ const IngredientForm = ({ setIsCreateFormVisible }: Props) => {
                     type="number"
                     min={1}
                     max={500}
+                    step={0.01}
                     required
                     className="bg-gray-200 outline-none focus:border-blue-500 border-2 p-1"
                     value={cost}

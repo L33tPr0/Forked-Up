@@ -49,7 +49,7 @@ function App() {
                 {
                     index: true,
                     element: (
-                        <div className="light h-full bg-gray-800 -z-30 grid place-items-center">
+                        <div className="light h-full bg-gray-300 -z-30 grid place-items-center">
                             <SignIn />
                         </div>
                     ),

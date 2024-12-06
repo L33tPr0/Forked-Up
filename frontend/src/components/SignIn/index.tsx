@@ -49,6 +49,7 @@ export default function SignIn() {
     }
 
     function handleSubmit() {
+        const errors: { [key: string]: ReactElement } = {};
         const payload = isLogin
             ? {
                   username,
@@ -62,13 +63,12 @@ export default function SignIn() {
         const promise = dispatch(signIn(payload));
         promise.then(async ({ payload, type }) => {
             if ("session/signIn/rejected" === type) {
-                for (const error in payload.errors) {
-                    errors[error] = (
-                        <ErrorMessage msg={payload.errors[error]} />
-                    );
-                }
-                setErrors(errors);
+                errors.user = <ErrorMessage msg={payload.message} />;
             }
+            setErrors(errors);
+            setUsername("");
+            setConfirmPassword("");
+            setPassword("");
         });
     }
 
@@ -78,36 +78,30 @@ export default function SignIn() {
 
         if (username.length < 4)
             errors.username = (
-                <div className="text-red-400">
-                    Provided username must be more than 4 characters
-                </div>
+                <ErrorMessage
+                    msg={"Username must be greater than 4 characters"}
+                />
             );
         if (!username)
-            errors.username = (
-                <div className="text-red-400">Username is required</div>
-            );
+            errors.username = <ErrorMessage msg={"Username is required"} />;
 
         if (password.length < 6)
             errors.password = (
-                <div className="text-red-400">
-                    Provided password must be more than 6 characters
-                </div>
+                <ErrorMessage
+                    msg={"Provided password must be greater than 6 characters"}
+                />
             );
         if (!password)
-            errors.password = (
-                <div className="text-red-400">Password is required</div>
-            );
+            errors.password = <ErrorMessage msg={"Password is required"} />;
         if (!email.includes("@") && !isLogin)
             errors.email = (
-                <div className="text-red-400">Provided email must be valid</div>
+                <ErrorMessage msg={"Provided email must be a valid address"} />
             );
         if (!email && !isLogin)
-            errors.email = (
-                <div className="text-red-400">Email is required</div>
-            );
+            errors.email = <ErrorMessage msg={"Email is required"} />;
         if (password !== confirmPassword && !isLogin)
             errors.passwordMismatch = (
-                <div>Provided passwords are not the same</div>
+                <ErrorMessage msg={"Provided passwords do not match"} />
             );
         if (!Object.values(errors).length) {
             handleSubmit();
@@ -116,8 +110,6 @@ export default function SignIn() {
         }
     }
 
-    function checkUsername() {}
-
     return (
         <div className="signin">
             <form
@@ -125,19 +117,21 @@ export default function SignIn() {
                 onSubmit={(e) => handleErrors(e)}
             >
                 <h2 className="headers">Login</h2>
+                {errors.user}
                 <div className="login-input-container">
                     <input
                         type="text"
                         onChange={(e) => update(e, setUsername)}
                         value={username}
+                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
                         placeholder="Username"
-                        onBlur={checkUsername}
                     />
 
                     <input
                         type="password"
                         onChange={(e) => update(e, setPassword)}
                         value={password}
+                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
                         placeholder="Password"
                     />
                 </div>
@@ -167,36 +161,59 @@ export default function SignIn() {
             >
                 <h2 className="headers">SignUp</h2>
                 <div className="signup-input-container">
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        onChange={(e) => update(e, setUsername)}
-                        value={username}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        onChange={(e) => update(e, setEmail)}
-                        value={email}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        onChange={(e) => update(e, setPassword)}
-                        value={password}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        onChange={(e) => update(e, setConfirmPassword)}
-                        value={confirmPassword}
-                    />
+                    {errors.user}
+                    <div className="flex flex-col items-center justify-center">
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            maxLength={16}
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            minLength={4}
+                            onChange={(e) => update(e, setUsername)}
+                            value={username}
+                        />
+                        {errors.username}
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            onChange={(e) => update(e, setEmail)}
+                            value={email}
+                        />
+                        {errors.email}
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            maxLength={16}
+                            minLength={6}
+                            onChange={(e) => update(e, setPassword)}
+                            value={password}
+                        />
+                        {errors.password}
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            maxLength={16}
+                            minLength={6}
+                            onChange={(e) => update(e, setConfirmPassword)}
+                            value={confirmPassword}
+                        />
+                        {errors.passwordMismatch}
+                    </div>
                 </div>
-                <button type="submit" className="submit-btn" title="Sign Up">
+                <button type="submit" className="text-gray-200" title="Sign Up">
                     Sign Up
                 </button>
                 <a
-                    className="light cursor-pointer text-slate-400"
+                    className="light cursor-pointer text-slate-800"
                     onClick={(e) => demoUserSignin(e)}
                 >
                     Sign in as Demo User

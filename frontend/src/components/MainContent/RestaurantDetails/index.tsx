@@ -50,7 +50,7 @@ const RestaurantDetails: FC = () => {
                     />
                 )}
                 <hr className="border-slate-900 mx-3 my-2" />
-                <div className="grid grid-rows-12 h-full place-items-center overflow-scroll">
+                <div className="grid grid-rows-12 h-full place-items-center overflow-y-auto">
                     {ingredients &&
                         ingredients.map((ingredient) => (
                             <div

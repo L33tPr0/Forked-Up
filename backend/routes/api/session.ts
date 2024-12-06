@@ -23,11 +23,21 @@ router.get("/", (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     const { password, username } = req.body;
-    const user = await prisma.owner.findUnique({
-        where: {
-            username,
-        },
-    });
+    if (!password || !username) {
+        res.status(400).json({
+            message: "Missing login credentials in request body",
+        });
+    }
+    let user;
+    try {
+        user = await prisma.owner.findUnique({
+            where: {
+                username,
+            },
+        });
+    } catch (e) {
+        res.status(500).json({ message: "This user does not exist", error: e });
+    }
     if (!user || !compareSync(password, user.hashedPassword.toString())) {
         next();
     }
@@ -48,21 +58,29 @@ router.post("/signup", async (req, res, next) => {
     console.log("REQUEST BODY FROM /API/SESSION/SIGNUP ===> ", req.body);
     const { username, email, password } = req.body;
 
-    const existingUser = await prisma.owner.findUnique({
-        where: {
-            email,
-        },
-    });
+    try {
+        const existingUser = await prisma.owner.findUnique({
+            where: {
+                email,
+            },
+        });
 
-    if (existingUser) res.status(400).json({ message: "User already exists." });
-    const userData = await prisma.owner.create({
-        data: {
-            username,
-            email,
-            hashedPassword: hashSync(password),
-        },
-    });
-    res.status(201).json(userData);
+        if (!existingUser) {
+            const userData = await prisma.owner.create({
+                data: {
+                    username,
+                    email,
+                    hashedPassword: hashSync(password),
+                },
+            });
+            res.status(201).json(userData);
+        }
+    } catch (e) {
+        res.status(500).json({
+            message: "This user already exists.",
+            error: e,
+        });
+    }
 });
 
 router.delete("/", (req, res, next) => {

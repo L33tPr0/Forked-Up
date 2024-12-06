@@ -123,7 +123,7 @@ export default function SignIn() {
                         type="text"
                         onChange={(e) => update(e, setUsername)}
                         value={username}
-                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                         placeholder="Username"
                     />
 
@@ -131,7 +131,7 @@ export default function SignIn() {
                         type="password"
                         onChange={(e) => update(e, setPassword)}
                         value={password}
-                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                        className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                         placeholder="Password"
                     />
                 </div>
@@ -167,7 +167,7 @@ export default function SignIn() {
                             type="text"
                             placeholder="Username"
                             maxLength={16}
-                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                             minLength={4}
                             onChange={(e) => update(e, setUsername)}
                             value={username}
@@ -178,7 +178,7 @@ export default function SignIn() {
                         <input
                             type="text"
                             placeholder="Email"
-                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                             onChange={(e) => update(e, setEmail)}
                             value={email}
                         />
@@ -188,7 +188,7 @@ export default function SignIn() {
                         <input
                             type="password"
                             placeholder="Password"
-                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                             maxLength={16}
                             minLength={6}
                             onChange={(e) => update(e, setPassword)}
@@ -200,7 +200,7 @@ export default function SignIn() {
                         <input
                             type="password"
                             placeholder="Confirm Password"
-                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2"
+                            className="h-11 text-xl bg-gray-400 text-white border-none outline-none pl-2 placeholder:text-slate-600"
                             maxLength={16}
                             minLength={6}
                             onChange={(e) => update(e, setConfirmPassword)}

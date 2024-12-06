@@ -37,21 +37,22 @@ router.post("/login", async (req, res, next) => {
         });
     } catch (e) {
         res.status(500).json({ message: "This user does not exist", error: e });
+    } finally {
+        if (!user || !compareSync(password, user.hashedPassword.toString())) {
+            next();
+        }
+
+        const safeUser = {
+            id: user?.id,
+            email: user?.email,
+            username: user?.username,
+            avatar: user?.avatar,
+        };
+
+        await setTokenCookie(res as UserResponse, safeUser as User);
+
+        res.json(safeUser);
     }
-    if (!user || !compareSync(password, user.hashedPassword.toString())) {
-        next();
-    }
-
-    const safeUser = {
-        id: user?.id,
-        email: user?.email,
-        username: user?.username,
-        avatar: user?.avatar,
-    };
-
-    await setTokenCookie(res as UserResponse, safeUser as User);
-
-    res.json(safeUser);
 });
 
 router.post("/signup", async (req, res, next) => {

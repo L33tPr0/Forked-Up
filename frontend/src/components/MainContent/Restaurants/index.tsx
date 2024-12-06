@@ -74,8 +74,10 @@ const Restaurants: FC = () => {
     };
 
     useEffect(() => {
-        dispatch(getRestaurants());
-    }, [dispatch]);
+        if (user) {
+            dispatch(getRestaurants());
+        }
+    }, [dispatch, user]);
     return (
         <div className="grid columns-1 grid-rows-2 gap-8 h-full">
             <div className="w-full bg-gray-100 mt-2 flex flex-col shadow-md shadow-gray-500">

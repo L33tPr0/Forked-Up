@@ -3,6 +3,7 @@ import { createLogger } from "redux-logger";
 import sessionReducer from "./reducers/session";
 import globalReducer from "./reducers/global";
 import restaurantReducer from "./reducers/restaurants";
+import inventoryReducer from "./reducers/inventory";
 
 const logger = import.meta.env.MODE !== "production" ? createLogger() : null;
 
@@ -14,6 +15,7 @@ export const store = configureStore({
         session: sessionReducer,
         global: globalReducer,
         restaurants: restaurantReducer,
+        inventory: inventoryReducer,
     },
 });
 

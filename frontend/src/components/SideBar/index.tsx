@@ -59,7 +59,7 @@ export default function SideBar() {
 
     const sidebarClassNames = `fixed flex flex-col ${
         isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64"
-    } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
+    } bg-slate-50 transition-all duration-300 overflow-hidden h-full shadow-lg z-40 shadow-gray-400`;
 
     function toggleSidebar() {
         dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));

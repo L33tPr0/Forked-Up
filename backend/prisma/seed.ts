@@ -28,7 +28,6 @@ async function main() {
         "owner.json",
         "restaurant.json",
         "inventory.json",
-        "ingredient.json",
     ];
 
     await deleteAllData(orderedFileNames);
@@ -44,9 +43,27 @@ async function main() {
             continue;
         }
 
-        await model.createMany({
-            data: jsonData,
-        });
+        if (modelName === "inventory") {
+            for (const data of jsonData) {
+                await model.create({
+                    data: {
+                        restaurant_id: data.restaurant_id,
+                        ingredient: {
+                            create: JSON.parse(
+                                fs.readFileSync(
+                                    path.join(dataDirectory, "ingredient.json"),
+                                    "utf-8"
+                                )
+                            ),
+                        },
+                    },
+                });
+            }
+        } else {
+            await model.createMany({
+                data: jsonData,
+            });
+        }
         console.log(`Seeded ${modelName} with data from ${fileName}`);
     }
 }

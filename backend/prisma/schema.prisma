@@ -55,7 +55,7 @@ model Inventory {
 
 model Menu {
   id Int @id @default(autoincrement())
-  restaurant Restaurant @relation(fields: [restaurant_id], references: [id])
+  restaurant Restaurant @relation(fields: [restaurant_id], references: [id], onDelete: Cascade)
   restaurant_id Int @unique
 
   entry Entry[]
@@ -85,7 +85,7 @@ model Ingredient {
   name String
   cost Decimal @db.Money
   ingredient_type String
-  auto_ship Boolean
+  auto_ship Boolean?
   unit_type String
   quantity_on_hand Decimal @db.Decimal(64,2)
   quantity_to_order Decimal @db.Decimal(64,2)

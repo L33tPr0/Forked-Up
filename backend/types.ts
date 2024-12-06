@@ -7,11 +7,11 @@ export interface User {
 }
 
 export interface UserResponse extends Response {
-    user: User | null;
+    user?: User | null;
 }
 
 export interface UserRequest extends Request {
-    user: User | null;
+    user?: User | null;
 }
 
 export class AuthenticationError extends Error {

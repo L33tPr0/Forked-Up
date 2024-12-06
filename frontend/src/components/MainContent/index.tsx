@@ -5,7 +5,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { RootState } from "../../redux/store";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import UserDropdown from "./UserDropdown";
 import { CgProfile } from "react-icons/cg";
 // import { Link } from "react-router-dom";
@@ -16,16 +16,18 @@ import {
     setIsSidebarCollapsed,
     setIsUserDropdownOpen,
 } from "../../redux/reducers/global";
-import { getRestaurants } from "../../redux/reducers/restaurants";
+import Restaurants from "./Restaurants";
+import RestaurantDetails from "./RestaurantDetails";
 
 const MainContent: FC = () => {
     const dispatch = useAppDispatch();
     const navigateTo = useNavigate();
     const location = useLocation();
+    const { id } = useParams();
+    const isHome = location.pathname === "/home";
+    const isRestaurants = location.pathname === "/restaurants";
+    const isRestaurant = location.pathname === `/restaurants/${id}`;
     const user = useAppSelector((state: RootState) => state.session.user);
-    const restaurants = useAppSelector(
-        (state: RootState) => state.restaurants.restaurants
-    );
     const isSidebarCollapsed: boolean = useAppSelector(
         (state: RootState) => state.global.isSidebarCollapsed
     );
@@ -53,12 +55,6 @@ const MainContent: FC = () => {
             navigateTo("/");
         }
     }, [user, navigateTo]);
-
-    useEffect(() => {
-        if (location.pathname === "/restaurants") {
-            dispatch(getRestaurants());
-        }
-    }, [dispatch, location.pathname]);
 
     return (
         <div
@@ -100,12 +96,12 @@ const MainContent: FC = () => {
                             <button onClick={toggleTheme}>
                                 {isDarkMode ? (
                                     <LuSun
-                                        className={`text-gray-500`}
+                                        className={`text-gray-900`}
                                         size={24}
                                     />
                                 ) : (
                                     <LuMoon
-                                        className={`text-gray-500`}
+                                        className={`text-gray-900`}
                                         size={24}
                                     />
                                 )}
@@ -141,45 +137,12 @@ const MainContent: FC = () => {
             </nav>
 
             {/* BODY CONTENT */}
-            {location.pathname === "/home" ? (
+            {isHome ? (
                 <main className="">The main content</main>
-            ) : location.pathname === "/restaurants" ? (
-                <div>
-                    <div
-                        className={`grid w-full h-full bg-slate-100 rounded-2xl grid-cols-4 grid-rows-${
-                            restaurants.length + 2
-                        }`}
-                    >
-                        <h2 className="text-2xl text-gray-900 m-3">
-                            Restaurants
-                        </h2>
-                        <h2 className="text-2xl text-gray-900 m-3">
-                            Carry Out
-                        </h2>
-                        <h2 className="text-2xl text-gray-900 m-3">
-                            Carry Out
-                        </h2>
-                        <h2 className="text-2xl text-gray-900 border-b-1 m-3">
-                            For Sale
-                        </h2>
-                        {restaurants.map((restaurant) => (
-                            <div key={restaurant.id} className="">
-                                <div className="">
-                                    <div className="text-gray-900">
-                                        {restaurant.name}
-                                    </div>
-                                    <div className="text-gray-900">
-                                        {restaurant.has_carryout
-                                            ? "This restaurant has carryout"
-                                            : "This restaurant does not have carryout"}
-                                    </div>
-                                    <div className="text-gray-900"></div>
-                                    <div className="text-gray-900"></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+            ) : isRestaurants ? (
+                <Restaurants />
+            ) : isRestaurant ? (
+                <RestaurantDetails />
             ) : null}
         </div>
     );

@@ -60,7 +60,7 @@ function App() {
                         <div
                             className={`${
                                 isDarkMode ? "dark" : "light"
-                            } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
+                            } flex bg-gray-50 text-gray-900 w-full h-full min-h-screen overflow-hidden`}
                         >
                             <SideBar />
                             <MainContent />
@@ -73,7 +73,20 @@ function App() {
                         <div
                             className={`${
                                 isDarkMode ? "dark" : "light"
-                            } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
+                            } flex bg-gray-50 text-gray-900 w-full h-full min-h-screen overflow-hidden`}
+                        >
+                            <SideBar />
+                            <MainContent />
+                        </div>
+                    ),
+                },
+                {
+                    path: "restaurants/:id",
+                    element: (
+                        <div
+                            className={`${
+                                isDarkMode ? "dark" : "light"
+                            } flex bg-gray-50 text-gray-900 w-full h-full min-h-screen overflow-hidden`}
                         >
                             <SideBar />
                             <MainContent />

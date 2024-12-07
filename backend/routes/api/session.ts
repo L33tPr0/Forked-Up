@@ -35,12 +35,8 @@ router.post("/login", async (req, res, next) => {
         },
     });
 
-    if (!user) {
-        res.status(500).json({ message: "This user does not exist" });
-    }
-
     if (!user || !compareSync(password, user.hashedPassword.toString())) {
-        next();
+        return next();
     }
 
     const safeUser = {

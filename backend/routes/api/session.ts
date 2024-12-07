@@ -29,30 +29,30 @@ router.post("/login", async (req, res, next) => {
             message: "Missing login credentials in request body",
         });
     }
-    try {
-        const user = await prisma.owner.findUnique({
-            where: {
-                username,
-            },
-        });
-        console.log(user);
-        if (!user || !compareSync(password, user.hashedPassword.toString())) {
-            next();
-        }
+    const user = await prisma.owner.findUnique({
+        where: {
+            username,
+        },
+    });
 
-        const safeUser = {
-            id: user?.id,
-            email: user?.email,
-            username: user?.username,
-            avatar: user?.avatar,
-        };
-        console.log(safeUser);
-        await setTokenCookie(res as UserResponse, safeUser as User);
-
-        res.json(safeUser);
-    } catch (e) {
-        res.status(500).json({ message: "This user does not exist", error: e });
+    if (!user) {
+        res.status(500).json({ message: "This user does not exist" });
     }
+
+    if (!user || !compareSync(password, user.hashedPassword.toString())) {
+        next();
+    }
+
+    const safeUser = {
+        id: user?.id,
+        email: user?.email,
+        username: user?.username,
+        avatar: user?.avatar,
+    };
+
+    await setTokenCookie(res as UserResponse, safeUser as User);
+
+    res.json(safeUser);
 });
 
 router.post("/signup", async (req, res, next) => {

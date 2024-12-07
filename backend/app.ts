@@ -6,6 +6,7 @@ import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import config from "./config";
+import { UserResponse } from "./types";
 
 require("dotenv").config();
 const app = express();
@@ -31,6 +32,13 @@ if (!IS_PRODUCTION) {
 /* ROUTES */
 
 app.use(routes);
+
+app.use(
+    "/*",
+    (err: Error, req: Request, res: UserResponse, next: NextFunction) => {
+        res.status(500).json({ message: err.message });
+    }
+);
 
 /* CONNECT */
 

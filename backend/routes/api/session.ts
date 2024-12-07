@@ -36,7 +36,7 @@ router.post("/login", async (req, res, next) => {
     });
 
     if (!user || !compareSync(password, user.hashedPassword.toString())) {
-        const err = new Error("This user does not exist");
+        const err = new Error("The provided credentials were invalid");
         return next(err);
     }
 

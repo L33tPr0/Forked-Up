@@ -11,19 +11,20 @@ router.use("/api", apiRouter);
 if (process.env.NODE_ENV === "production") {
     router.get("/", (req, res) => {
         res.sendFile(
-            path.resolve(__dirname, "../../../frontend", "dist", "index.html")
+            path.resolve(__dirname, "../../frontend", "dist", "index.html")
         );
     });
 
     router.use(express.static(path.resolve("../../frontend/dist")));
 
     router.get(/^(?!\/?api).*/, (req, res) => {
+        console.log(req.path)
         res.sendFile(
             path.resolve(
                 __dirname,
-                "../../../frontend",
+                "../../frontend",
                 "dist",
-                req.path.slice(1)
+                "index.html"
             )
         );
     });

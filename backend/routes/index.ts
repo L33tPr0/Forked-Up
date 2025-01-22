@@ -18,12 +18,13 @@ if (process.env.NODE_ENV === "production") {
     router.use(express.static(path.resolve("../../frontend/dist")));
 
     router.get(/^(?!\/?api).*/, (req, res) => {
+        console.log(__dirname)
         res.sendFile(
             path.resolve(
                 __dirname,
                 "../../frontend",
                 "dist",
-                req.path.slice(1)
+                "index.html"
             )
         );
     });

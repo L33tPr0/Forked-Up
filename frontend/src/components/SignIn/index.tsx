@@ -143,7 +143,7 @@ export default function SignIn() {
                 </div>
                 <button
                     type="submit"
-                    className="submit-btn text-gray-200"
+                    className="submit-btn text-gray-500"
                     title="Login"
                 >
                     Login
@@ -215,7 +215,7 @@ export default function SignIn() {
                         {errors.passwordMismatch}
                     </div>
                 </div>
-                <button type="submit" className="text-gray-200" title="Sign Up">
+                <button type="submit" className="text-gray-500" title="Sign Up">
                     Sign Up
                 </button>
                 <a

@@ -150,6 +150,7 @@
     background-clip: text;
     color: transparent;
     margin: 0;
+    font-size: large;
 }
 
 @property --angle {

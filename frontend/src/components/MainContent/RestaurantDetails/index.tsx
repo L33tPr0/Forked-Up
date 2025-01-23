@@ -16,7 +16,7 @@ const RestaurantDetails: FC = () => {
     const [isEdit, setIsEdit] = useState("0");
     const ingredients = useAppSelector((state) => state.inventory.ingredients);
     const [isCreateFormVisible, setIsCreateFormVisible] = useState(false);
-
+    console.log(ingredients)
     const handleDelete = async (id: number) => {
         await dispatch(deleteOneIngredient(id));
     };

@@ -8,8 +8,8 @@ export interface Ingredient extends Model {
     ingredient_type: string;
     auto_ship?: boolean;
     unit_type: string;
-    quantity_on_hand: number;
-    quantity_to_order: number;
+    quantity_on_hand?: number;
+    quantity_to_order?: number;
 }
 
 export interface Restaurant extends Model {

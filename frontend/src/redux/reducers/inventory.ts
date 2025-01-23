@@ -51,6 +51,7 @@ export const addOneIngredient = createAppAsyncThunk(
         if (!res.ok) {
             return rejectWithValue(data);
         }
+        console.log(data)
         return fulfillWithValue(data);
     }
 );
@@ -103,7 +104,9 @@ const ingredientSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(addOneIngredient.fulfilled, () => {})
+            .addCase(addOneIngredient.fulfilled, (state, action) => {
+               state.ingredients[state.ingredients.length] = action.payload
+            })
             .addCase(deleteOneIngredient.fulfilled, (state, action) => {
                 const index = state.ingredients.findIndex(
                     (item) => item.id === action.payload

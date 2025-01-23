@@ -112,8 +112,11 @@ export default function SignIn() {
 
     return (
         <div className="signin-container">
-            <h1>This is ForkedUp</h1>
-            <h3>Your one stop app for your restaurant inventory management needs.</h3>
+            <div className="flex flex-col">
+
+                <h1 className="text-xl">This is ForkedUp</h1>
+                <h3>Your one stop app for your restaurant inventory management needs.</h3>
+            </div>
         <div className="signin">
             <form
                 className={`${isLogin ? "show" : "hide"}`}

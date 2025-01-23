@@ -7,6 +7,7 @@
     background-color: rgb(100, 100, 100);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.8);
+    background-image: url("/banquet.jpeg");
 }
 
 .hide {

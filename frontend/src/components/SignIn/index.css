@@ -17,6 +17,12 @@
     align-items: center;
 }
 
+.splash-text {
+    background-color: aliceblue;
+    opacity: 90%;
+    filter: blur(4px);
+}
+
 .hide {
     translate: -50%;
     transition: 400ms;

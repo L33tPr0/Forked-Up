@@ -112,9 +112,9 @@ export default function SignIn() {
 
     return (
         <div className="signin-container">
-            <div className="flex flex-col">
+            <div className="splash-text">
 
-                <h1 className="text-xl">This is ForkedUp</h1>
+                <h1 className="headers">This is ForkedUp</h1>
                 <h3>Your one stop app for your restaurant inventory management needs.</h3>
             </div>
         <div className="signin">

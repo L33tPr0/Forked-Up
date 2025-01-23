@@ -16,13 +16,13 @@
     justify-content: center;
     align-items: center;
     background-color: aliceblue;
-    opacity: 95%;
+    opacity: 5%;
     border-radius: 1rem;
 }
 
 .splash-text {
     background-color: aliceblue;
-    opacity: 90%;
+    opacity: 10%;
 }
 
 .hide {

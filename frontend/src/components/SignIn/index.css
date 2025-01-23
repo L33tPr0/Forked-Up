@@ -15,11 +15,14 @@
     text-align: start;
     justify-content: center;
     align-items: center;
+    background-color: aliceblue;
+    opacity: 50%;
+    border-radius: 1rem;
 }
 
 .splash-text {
     background-color: aliceblue;
-    opacity: 70%;
+    opacity: 50%;
 }
 
 .hide {

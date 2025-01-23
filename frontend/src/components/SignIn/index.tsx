@@ -143,7 +143,7 @@ export default function SignIn() {
                 </div>
                 <button
                     type="submit"
-                    className="submit-btn text-white"
+                    className="submit-btn text-gray-200"
                     title="Login"
                 >
                     Login

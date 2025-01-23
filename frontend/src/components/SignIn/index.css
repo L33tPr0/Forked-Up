@@ -1,6 +1,6 @@
 .signin {
     width: 1920px;
-    height: auto;
+    height: 100vh;
     padding: 1.5rem;
     text-align: center;
     background-image: url("/banquet.jpeg");

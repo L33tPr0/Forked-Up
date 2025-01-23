@@ -214,8 +214,14 @@ router.post("/", async (req, res, next) => {
                     },
                 });
 
+                
                 if (newRecord) {
                     console.log(newRecord);
+                    await prisma.inventory.create({
+                        data: {
+                            restaurant_id: newRecord.id,
+                        }
+                    })
                     res.status(201).json(newRecord);
                 }
             } catch (e) {

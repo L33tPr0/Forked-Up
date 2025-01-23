@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
                 __dirname,
                 "../../frontend",
                 "dist",
-                "index.html"
+                req.path.slice(1)
             )
         );
     });

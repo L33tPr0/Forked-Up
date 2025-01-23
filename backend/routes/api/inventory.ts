@@ -15,7 +15,7 @@ router.post("/:id/ingredients", async (req, res, next) => {
     try {
         const id = parseInt(req.params.id);
 
-        const ingredients = await prisma.inventory.update({
+        const ingredient = await prisma.inventory.update({
             where: {
                 restaurant_id: id,
             },
@@ -25,7 +25,7 @@ router.post("/:id/ingredients", async (req, res, next) => {
                 },
             },
         });
-        res.status(201).json({ message: "Successful creation" });
+        res.status(201).json({ message: "Successful creation", ingredient });
     } catch (e) {
         res.status(500).json({ message: "Internal Server error", error: e });
     }

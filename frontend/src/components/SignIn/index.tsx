@@ -111,9 +111,10 @@ export default function SignIn() {
     }
 
     return (
-        <div className="signin">
+        <div className="signin-container">
             <h1>This is ForkedUp</h1>
             <h3>Your one stop app for your restaurant inventory management needs.</h3>
+        <div className="signin">
             <form
                 className={`${isLogin ? "show" : "hide"}`}
                 onSubmit={(e) => handleErrors(e)}
@@ -227,6 +228,7 @@ export default function SignIn() {
                     </span>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

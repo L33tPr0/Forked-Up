@@ -1,9 +1,20 @@
-.signin {
+.signin-container {
     width: 1920px;
     height: 100vh;
-    padding: 1.5rem;
-    text-align: center;
     background-image: url("/banquet.jpeg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: center;
+    align-items: center;
 }
 
 .hide {

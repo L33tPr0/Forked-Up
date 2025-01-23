@@ -112,6 +112,8 @@ export default function SignIn() {
 
     return (
         <div className="signin">
+            <h1>This is ForkedUp</h1>
+            <h3>Your one stop app for your restaurant inventory management needs.</h3>
             <form
                 className={`${isLogin ? "show" : "hide"}`}
                 onSubmit={(e) => handleErrors(e)}

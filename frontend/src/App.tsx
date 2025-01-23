@@ -49,14 +49,9 @@ function App() {
                 {
                     index: true,
                     element: (
-                        <>
-                        <h1>This is ForkedUp</h1>
-                        <h3>Your one stop app for all your inventory management needs.</h3>
-                        <img src="/banquet.jpeg" alt="" />
                         <div className="light h-full bg-gray-300 -z-30 grid place-items-center">
                             <SignIn />
                         </div>
-                        </>
                     ),
                 },
                 {

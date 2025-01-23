@@ -150,7 +150,7 @@ export default function SignIn() {
                 </a>
                 <div>
                     Don&apos;t have an account? Create one{" "}
-                    <span className="here" onClick={() => setIsLogin(!isLogin)}>
+                    <span className="here" onClick={function() {setIsLogin(!isLogin); setErrors({})} }>
                         here
                     </span>
                 </div>
@@ -220,7 +220,7 @@ export default function SignIn() {
                 </a>
                 <div>
                     Already have an account? Log in{" "}
-                    <span className="here" onClick={() => setIsLogin(!isLogin)}>
+                    <span className="here" onClick={function() {setIsLogin(!isLogin); setErrors({})} }>
                         here
                     </span>
                 </div>

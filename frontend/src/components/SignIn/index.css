@@ -168,11 +168,11 @@
     background-image: conic-gradient(
         from var(--angle),
         transparent,
-        rgb(255, 0, 0),
+        rgb(150, 0, 0),
         transparent,
-        blue,
+        rgb(0, 0, 150),
         transparent,
-        rgb(0, 255, 0),
+        rgb(0, 150, 0),
         transparent
     );
     top: 50%;

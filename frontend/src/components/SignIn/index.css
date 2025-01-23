@@ -1,12 +1,9 @@
 .signin {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: auto;
     padding: 1.5rem;
     text-align: center;
-    background-color: rgb(100, 100, 100);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
     background-image: url("/banquet.jpeg");
 }
 

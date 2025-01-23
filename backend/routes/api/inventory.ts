@@ -77,7 +77,7 @@ router.get("/:id", async (req, res, next) => {
 
         const record = await prisma.inventory.findUnique({
             where: {
-                id,
+                restaurant_id: id
             },
             include: {
                 ingredient: true,
